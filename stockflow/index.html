@@ -1,0 +1,184 @@
+﻿<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="StockFlow Mini ERP ระบบจัดการสต็อกและคำสั่งซื้อสำหรับร้านวัสดุและธุรกิจขายสินค้า">
+  <title>StockFlow Mini ERP | Thanaphat Portfolio Project</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar" aria-label="Project navigation">
+    <a class="brand" href="../index.html#projects-demo">
+      <span>SF</span>
+      <strong>StockFlow</strong>
+    </a>
+    <nav>
+      <a href="#dashboard" class="active">Dashboard</a>
+      <a href="#inventory">Inventory</a>
+      <a href="#orders">Orders</a>
+      <a href="#report">Report</a>
+    </nav>
+    <a class="back-link" href="../index.html#projects-demo">กลับ Portfolio</a>
+  </aside>
+
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Business Web Application</p>
+        <h1>ระบบจัดการสต็อกและคำสั่งซื้อ</h1>
+      </div>
+      <div class="top-actions">
+        <button class="secondary-btn" id="exportReport" type="button">Export CSV</button>
+        <button class="reset-btn" id="resetData" type="button">รีเซ็ตข้อมูล</button>
+      </div>
+    </header>
+
+    <section class="hero" id="dashboard">
+      <div class="hero-copy">
+        <h2>Mini ERP สำหรับร้านวัสดุ / ธุรกิจขายสินค้า</h2>
+        <p>ระบบนี้ออกแบบมาเพื่อจัดการข้อมูลสินค้า คำสั่งซื้อ สถานะสต็อก และรายงานเบื้องต้นในหน้าจอเดียว โดยใช้ HTML, CSS และ JavaScript</p>
+      </div>
+      <div class="health-card" aria-label="system health">
+        <span class="pulse"></span>
+        <strong id="healthText">ระบบพร้อมใช้งาน</strong>
+        <small>ข้อมูลถูกจัดเก็บด้วย LocalStorage ในเครื่องผู้ชม</small>
+      </div>
+    </section>
+
+    <section class="kpi-grid" aria-label="summary cards">
+      <article class="kpi-card">
+        <span>มูลค่าสต็อก</span>
+        <strong id="stockValue">0</strong>
+      </article>
+      <article class="kpi-card">
+        <span>จำนวนสินค้า</span>
+        <strong id="totalItems">0</strong>
+      </article>
+      <article class="kpi-card warning">
+        <span>สินค้าใกล้หมด</span>
+        <strong id="lowStock">0</strong>
+      </article>
+      <article class="kpi-card success">
+        <span>คำสั่งซื้อเดือนนี้</span>
+        <strong id="monthlyOrders">0</strong>
+      </article>
+    </section>
+
+    <section class="workspace" id="inventory">
+      <div class="panel inventory-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Inventory</p>
+            <h2>คลังสินค้า</h2>
+          </div>
+          <div class="filters">
+            <input id="searchInput" type="search" placeholder="ค้นหาสินค้า">
+            <select id="categoryFilter" aria-label="กรองหมวดหมู่">
+              <option value="all">ทุกหมวดหมู่</option>
+              <option value="วัสดุก่อสร้าง">วัสดุก่อสร้าง</option>
+              <option value="เครื่องมือ">เครื่องมือ</option>
+              <option value="ประปา">ประปา</option>
+              <option value="ไฟฟ้า">ไฟฟ้า</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>สินค้า</th>
+                <th>หมวดหมู่</th>
+                <th>คงเหลือ</th>
+                <th>ราคา</th>
+                <th>สถานะ</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="inventoryRows"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <form class="panel product-form" id="productForm">
+        <p class="eyebrow">Add Item</p>
+        <h2>เพิ่มสินค้า</h2>
+        <label>ชื่อสินค้า<input id="productName" required minlength="2" placeholder="เช่น ปูนซีเมนต์"></label>
+        <label>หมวดหมู่
+          <select id="productCategory" required>
+            <option value="วัสดุก่อสร้าง">วัสดุก่อสร้าง</option>
+            <option value="เครื่องมือ">เครื่องมือ</option>
+            <option value="ประปา">ประปา</option>
+            <option value="ไฟฟ้า">ไฟฟ้า</option>
+          </select>
+        </label>
+        <div class="form-grid">
+          <label>จำนวน<input id="productQty" required type="number" min="0" value="10"></label>
+          <label>ราคา<input id="productPrice" required type="number" min="1" value="120"></label>
+        </div>
+        <button type="submit">เพิ่มสินค้า</button>
+        <p class="form-note">รายการที่เพิ่มจะแสดงทันทีในตารางและคำนวณ Dashboard ใหม่อัตโนมัติ</p>
+      </form>
+    </section>
+
+    <section class="insight-grid">
+      <div class="panel chart-panel">
+        <div class="panel-head simple">
+          <div>
+            <p class="eyebrow">Analytics</p>
+            <h2>มูลค่าสต็อกตามหมวดหมู่</h2>
+          </div>
+        </div>
+        <div id="chartBars" class="chart-bars"></div>
+      </div>
+      <div class="panel alert-panel">
+        <p class="eyebrow">Alerts</p>
+        <h2>รายการที่ควรเติมสต็อก</h2>
+        <div id="alertList" class="alert-list"></div>
+      </div>
+    </section>
+
+        <div class="anchor-point" id="about" aria-hidden="true"></div>
+    <section class="panel report-panel" id="report">
+      <div class="panel-head simple">
+        <div>
+          <p class="eyebrow">Case Study</p>
+          <h2>สรุปแนวคิดโปรเจค</h2>
+        </div>
+      </div>
+      <div class="case-grid">
+        <article>
+          <strong>ปัญหาที่แก้</strong>
+          <p>ร้านค้าขนาดเล็กมักตรวจสต็อกยาก ไม่เห็นสินค้าที่ควรเติม และต้องสรุปยอดด้วยมือ</p>
+        </article>
+        <article>
+          <strong>สิ่งที่ระบบทำได้</strong>
+          <p>รวมข้อมูลสินค้า คำสั่งซื้อ สถานะสต็อก และรายงานเบื้องต้นไว้ในหน้าจอเดียว</p>
+        </article>
+        <article>
+          <strong>ทักษะที่แสดง</strong>
+          <p>DOM manipulation, form validation, LocalStorage, filtering, calculations, responsive UI</p>
+        </article>
+      </div>
+      <div class="metric-list" id="reportSummary"></div>
+    </section>
+
+    <section class="panel orders" id="orders">
+      <div class="panel-head simple">
+        <div>
+          <p class="eyebrow">Orders</p>
+          <h2>คำสั่งซื้อวันนี้</h2>
+        </div>
+      </div>
+      <div class="order-board" id="orderBoard"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+
+
+
