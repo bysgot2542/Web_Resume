@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="th">
 <head>
   <meta charset="utf-8">
@@ -8,59 +8,63 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <aside class="sidebar" aria-label="Project navigation">
+  <aside class="sidebar" aria-label="Project navigation" data-i18n-aria-label="sidebar.label">
     <a class="brand" href="../index.html#projects-demo">
       <span>SF</span>
       <strong>StockFlow</strong>
     </a>
     <nav>
-      <a href="#dashboard" class="active">Dashboard</a>
-      <a href="#inventory">Inventory</a>
-      <a href="#orders">Orders</a>
-      <a href="#report">Report</a>
+      <a href="#dashboard" class="active" data-i18n="sidebar.dashboard">Dashboard</a>
+      <a href="#inventory" data-i18n="sidebar.inventory">Inventory</a>
+      <a href="#orders" data-i18n="sidebar.orders">Orders</a>
+      <a href="#report" data-i18n="sidebar.report">Report</a>
     </nav>
-    <a class="back-link" href="../index.html#projects-demo">กลับ Portfolio</a>
+    <div class="language-switch" role="group" aria-label="เลือกภาษา" data-i18n-aria-label="language.switchLabel">
+      <button class="lang-button is-active" type="button" data-lang="th" aria-pressed="true">TH</button>
+      <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="back-link" href="../index.html#projects-demo" data-i18n="sidebar.back">กลับ Portfolio</a>
   </aside>
 
   <main class="app-shell">
     <header class="topbar">
       <div>
-        <p class="eyebrow">Business Web Application</p>
-        <h1>ระบบจัดการสต็อกและคำสั่งซื้อ</h1>
+        <p class="eyebrow" data-i18n="top.eyebrow">Business Web Application</p>
+        <h1 data-i18n="top.title">ระบบจัดการสต็อกและคำสั่งซื้อ</h1>
       </div>
       <div class="top-actions">
-        <button class="secondary-btn" id="exportReport" type="button">Export CSV</button>
-        <button class="reset-btn" id="resetData" type="button">รีเซ็ตข้อมูล</button>
+        <button class="secondary-btn" id="exportReport" type="button" data-i18n="top.export">Export CSV</button>
+        <button class="reset-btn" id="resetData" type="button" data-i18n="top.reset">รีเซ็ตข้อมูล</button>
       </div>
     </header>
 
     <section class="hero" id="dashboard">
       <div class="hero-copy">
-        <h2>Mini ERP สำหรับร้านวัสดุ / ธุรกิจขายสินค้า</h2>
-        <p>ระบบนี้ออกแบบมาเพื่อจัดการข้อมูลสินค้า คำสั่งซื้อ สถานะสต็อก และรายงานเบื้องต้นในหน้าจอเดียว โดยใช้ HTML, CSS และ JavaScript</p>
+        <h2 data-i18n="hero.title">Mini ERP สำหรับร้านวัสดุ / ธุรกิจขายสินค้า</h2>
+        <p data-i18n="hero.body">ระบบนี้ออกแบบมาเพื่อจัดการข้อมูลสินค้า คำสั่งซื้อ สถานะสต็อก และรายงานเบื้องต้นในหน้าจอเดียว โดยใช้ HTML, CSS และ JavaScript</p>
       </div>
-      <div class="health-card" aria-label="system health">
+      <div class="health-card" aria-label="system health" data-i18n-aria-label="hero.healthLabel">
         <span class="pulse"></span>
         <strong id="healthText">ระบบพร้อมใช้งาน</strong>
-        <small>ข้อมูลถูกจัดเก็บด้วย LocalStorage ในเครื่องผู้ชม</small>
+        <small data-i18n="hero.storageNote">ข้อมูลถูกจัดเก็บด้วย LocalStorage ในเครื่องผู้ชม</small>
       </div>
     </section>
 
-    <section class="kpi-grid" aria-label="summary cards">
+    <section class="kpi-grid" aria-label="summary cards" data-i18n-aria-label="kpi.label">
       <article class="kpi-card">
-        <span>มูลค่าสต็อก</span>
+        <span data-i18n="kpi.stockValue">มูลค่าสต็อก</span>
         <strong id="stockValue">0</strong>
       </article>
       <article class="kpi-card">
-        <span>จำนวนสินค้า</span>
+        <span data-i18n="kpi.totalItems">จำนวนสินค้า</span>
         <strong id="totalItems">0</strong>
       </article>
       <article class="kpi-card warning">
-        <span>สินค้าใกล้หมด</span>
+        <span data-i18n="kpi.lowStock">สินค้าใกล้หมด</span>
         <strong id="lowStock">0</strong>
       </article>
       <article class="kpi-card success">
-        <span>คำสั่งซื้อเดือนนี้</span>
+        <span data-i18n="kpi.monthlyOrders">คำสั่งซื้อเดือนนี้</span>
         <strong id="monthlyOrders">0</strong>
       </article>
     </section>
@@ -69,17 +73,17 @@
       <div class="panel inventory-panel">
         <div class="panel-head">
           <div>
-            <p class="eyebrow">Inventory</p>
-            <h2>คลังสินค้า</h2>
+            <p class="eyebrow" data-i18n="inventory.eyebrow">Inventory</p>
+            <h2 data-i18n="inventory.title">คลังสินค้า</h2>
           </div>
           <div class="filters">
-            <input id="searchInput" type="search" placeholder="ค้นหาสินค้า">
-            <select id="categoryFilter" aria-label="กรองหมวดหมู่">
-              <option value="all">ทุกหมวดหมู่</option>
-              <option value="วัสดุก่อสร้าง">วัสดุก่อสร้าง</option>
-              <option value="เครื่องมือ">เครื่องมือ</option>
-              <option value="ประปา">ประปา</option>
-              <option value="ไฟฟ้า">ไฟฟ้า</option>
+            <input id="searchInput" type="search" placeholder="ค้นหาสินค้า" data-i18n-placeholder="inventory.search">
+            <select id="categoryFilter" aria-label="กรองหมวดหมู่" data-i18n-aria-label="inventory.categoryFilter">
+              <option value="all" data-i18n="category.all">ทุกหมวดหมู่</option>
+              <option value="วัสดุก่อสร้าง" data-i18n="category.materials">วัสดุก่อสร้าง</option>
+              <option value="เครื่องมือ" data-i18n="category.tools">เครื่องมือ</option>
+              <option value="ประปา" data-i18n="category.plumbing">ประปา</option>
+              <option value="ไฟฟ้า" data-i18n="category.electrical">ไฟฟ้า</option>
             </select>
           </div>
         </div>
@@ -87,11 +91,11 @@
           <table>
             <thead>
               <tr>
-                <th>สินค้า</th>
-                <th>หมวดหมู่</th>
-                <th>คงเหลือ</th>
-                <th>ราคา</th>
-                <th>สถานะ</th>
+                <th data-i18n="table.product">สินค้า</th>
+                <th data-i18n="table.category">หมวดหมู่</th>
+                <th data-i18n="table.qty">คงเหลือ</th>
+                <th data-i18n="table.price">ราคา</th>
+                <th data-i18n="table.status">สถานะ</th>
                 <th></th>
               </tr>
             </thead>
@@ -101,23 +105,23 @@
       </div>
 
       <form class="panel product-form" id="productForm">
-        <p class="eyebrow">Add Item</p>
-        <h2>เพิ่มสินค้า</h2>
-        <label>ชื่อสินค้า<input id="productName" required minlength="2" placeholder="เช่น ปูนซีเมนต์"></label>
-        <label>หมวดหมู่
+        <p class="eyebrow" data-i18n="form.eyebrow">Add Item</p>
+        <h2 data-i18n="form.title">เพิ่มสินค้า</h2>
+        <label><span data-i18n="form.nameLabel">ชื่อสินค้า</span><input id="productName" required minlength="2" placeholder="เช่น ปูนซีเมนต์" data-i18n-placeholder="form.namePlaceholder"></label>
+        <label><span data-i18n="form.categoryLabel">หมวดหมู่</span>
           <select id="productCategory" required>
-            <option value="วัสดุก่อสร้าง">วัสดุก่อสร้าง</option>
-            <option value="เครื่องมือ">เครื่องมือ</option>
-            <option value="ประปา">ประปา</option>
-            <option value="ไฟฟ้า">ไฟฟ้า</option>
+            <option value="วัสดุก่อสร้าง" data-i18n="category.materials">วัสดุก่อสร้าง</option>
+            <option value="เครื่องมือ" data-i18n="category.tools">เครื่องมือ</option>
+            <option value="ประปา" data-i18n="category.plumbing">ประปา</option>
+            <option value="ไฟฟ้า" data-i18n="category.electrical">ไฟฟ้า</option>
           </select>
         </label>
         <div class="form-grid">
-          <label>จำนวน<input id="productQty" required type="number" min="0" value="10"></label>
-          <label>ราคา<input id="productPrice" required type="number" min="1" value="120"></label>
+          <label><span data-i18n="form.qtyLabel">จำนวน</span><input id="productQty" required type="number" min="0" value="10"></label>
+          <label><span data-i18n="form.priceLabel">ราคา</span><input id="productPrice" required type="number" min="1" value="120"></label>
         </div>
-        <button type="submit">เพิ่มสินค้า</button>
-        <p class="form-note">รายการที่เพิ่มจะแสดงทันทีในตารางและคำนวณ Dashboard ใหม่อัตโนมัติ</p>
+        <button type="submit" data-i18n="form.submit">เพิ่มสินค้า</button>
+        <p class="form-note" data-i18n="form.note">รายการที่เพิ่มจะแสดงทันทีในตารางและคำนวณ Dashboard ใหม่อัตโนมัติ</p>
       </form>
     </section>
 
@@ -125,39 +129,39 @@
       <div class="panel chart-panel">
         <div class="panel-head simple">
           <div>
-            <p class="eyebrow">Analytics</p>
-            <h2>มูลค่าสต็อกตามหมวดหมู่</h2>
+            <p class="eyebrow" data-i18n="analytics.eyebrow">Analytics</p>
+            <h2 data-i18n="analytics.title">มูลค่าสต็อกตามหมวดหมู่</h2>
           </div>
         </div>
         <div id="chartBars" class="chart-bars"></div>
       </div>
       <div class="panel alert-panel">
-        <p class="eyebrow">Alerts</p>
-        <h2>รายการที่ควรเติมสต็อก</h2>
+        <p class="eyebrow" data-i18n="alerts.eyebrow">Alerts</p>
+        <h2 data-i18n="alerts.title">รายการที่ควรเติมสต็อก</h2>
         <div id="alertList" class="alert-list"></div>
       </div>
     </section>
 
-        <div class="anchor-point" id="about" aria-hidden="true"></div>
+    <div class="anchor-point" id="about" aria-hidden="true"></div>
     <section class="panel report-panel" id="report">
       <div class="panel-head simple">
         <div>
-          <p class="eyebrow">Case Study</p>
-          <h2>สรุปแนวคิดโปรเจค</h2>
+          <p class="eyebrow" data-i18n="case.eyebrow">Case Study</p>
+          <h2 data-i18n="case.title">สรุปแนวคิดโปรเจค</h2>
         </div>
       </div>
       <div class="case-grid">
         <article>
-          <strong>ปัญหาที่แก้</strong>
-          <p>ร้านค้าขนาดเล็กมักตรวจสต็อกยาก ไม่เห็นสินค้าที่ควรเติม และต้องสรุปยอดด้วยมือ</p>
+          <strong data-i18n="case.problemTitle">ปัญหาที่แก้</strong>
+          <p data-i18n="case.problemBody">ร้านค้าขนาดเล็กมักตรวจสต็อกยาก ไม่เห็นสินค้าที่ควรเติม และต้องสรุปยอดด้วยมือ</p>
         </article>
         <article>
-          <strong>สิ่งที่ระบบทำได้</strong>
-          <p>รวมข้อมูลสินค้า คำสั่งซื้อ สถานะสต็อก และรายงานเบื้องต้นไว้ในหน้าจอเดียว</p>
+          <strong data-i18n="case.solutionTitle">สิ่งที่ระบบทำได้</strong>
+          <p data-i18n="case.solutionBody">รวมข้อมูลสินค้า คำสั่งซื้อ สถานะสต็อก และรายงานเบื้องต้นไว้ในหน้าจอเดียว</p>
         </article>
         <article>
-          <strong>ทักษะที่แสดง</strong>
-          <p>DOM manipulation, form validation, LocalStorage, filtering, calculations, responsive UI</p>
+          <strong data-i18n="case.skillsTitle">ทักษะที่แสดง</strong>
+          <p data-i18n="case.skillsBody">DOM manipulation, form validation, LocalStorage, filtering, calculations, responsive UI</p>
         </article>
       </div>
       <div class="metric-list" id="reportSummary"></div>
@@ -166,8 +170,8 @@
     <section class="panel orders" id="orders">
       <div class="panel-head simple">
         <div>
-          <p class="eyebrow">Orders</p>
-          <h2>คำสั่งซื้อวันนี้</h2>
+          <p class="eyebrow" data-i18n="orders.eyebrow">Orders</p>
+          <h2 data-i18n="orders.title">คำสั่งซื้อวันนี้</h2>
         </div>
       </div>
       <div class="order-board" id="orderBoard"></div>
@@ -177,8 +181,3 @@
   <script src="app.js"></script>
 </body>
 </html>
-
-
-
-
-

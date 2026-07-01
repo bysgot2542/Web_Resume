@@ -1,4 +1,205 @@
-﻿const seedProducts = [
+const languageStorageKey = 'thanaphat-portfolio-language';
+
+const copy = {
+  th: {
+    pageTitle: 'StockFlow Mini ERP | Thanaphat Portfolio Project',
+    metaDescription: 'StockFlow Mini ERP ระบบจัดการสต็อกและคำสั่งซื้อสำหรับร้านวัสดุและธุรกิจขายสินค้า',
+    'language.switchLabel': 'เลือกภาษา',
+    'sidebar.label': 'เมนูโปรเจค',
+    'sidebar.dashboard': 'Dashboard',
+    'sidebar.inventory': 'Inventory',
+    'sidebar.orders': 'Orders',
+    'sidebar.report': 'Report',
+    'sidebar.back': 'กลับ Portfolio',
+    'top.eyebrow': 'Business Web Application',
+    'top.title': 'ระบบจัดการสต็อกและคำสั่งซื้อ',
+    'top.export': 'Export CSV',
+    'top.reset': 'รีเซ็ตข้อมูล',
+    'hero.title': 'Mini ERP สำหรับร้านวัสดุ / ธุรกิจขายสินค้า',
+    'hero.body': 'ระบบนี้ออกแบบมาเพื่อจัดการข้อมูลสินค้า คำสั่งซื้อ สถานะสต็อก และรายงานเบื้องต้นในหน้าจอเดียว โดยใช้ HTML, CSS และ JavaScript',
+    'hero.healthLabel': 'สถานะระบบ',
+    'hero.storageNote': 'ข้อมูลถูกจัดเก็บด้วย LocalStorage ในเครื่องผู้ชม',
+    'kpi.label': 'การ์ดสรุปข้อมูล',
+    'kpi.stockValue': 'มูลค่าสต็อก',
+    'kpi.totalItems': 'จำนวนสินค้า',
+    'kpi.lowStock': 'สินค้าใกล้หมด',
+    'kpi.monthlyOrders': 'คำสั่งซื้อเดือนนี้',
+    'inventory.eyebrow': 'Inventory',
+    'inventory.title': 'คลังสินค้า',
+    'inventory.search': 'ค้นหาสินค้า',
+    'inventory.categoryFilter': 'กรองหมวดหมู่',
+    'category.all': 'ทุกหมวดหมู่',
+    'category.materials': 'วัสดุก่อสร้าง',
+    'category.tools': 'เครื่องมือ',
+    'category.plumbing': 'ประปา',
+    'category.electrical': 'ไฟฟ้า',
+    'table.product': 'สินค้า',
+    'table.category': 'หมวดหมู่',
+    'table.qty': 'คงเหลือ',
+    'table.price': 'ราคา',
+    'table.status': 'สถานะ',
+    'form.eyebrow': 'Add Item',
+    'form.title': 'เพิ่มสินค้า',
+    'form.nameLabel': 'ชื่อสินค้า',
+    'form.namePlaceholder': 'เช่น ปูนซีเมนต์',
+    'form.categoryLabel': 'หมวดหมู่',
+    'form.qtyLabel': 'จำนวน',
+    'form.priceLabel': 'ราคา',
+    'form.submit': 'เพิ่มสินค้า',
+    'form.note': 'รายการที่เพิ่มจะแสดงทันทีในตารางและคำนวณ Dashboard ใหม่อัตโนมัติ',
+    'analytics.eyebrow': 'Analytics',
+    'analytics.title': 'มูลค่าสต็อกตามหมวดหมู่',
+    'alerts.eyebrow': 'Alerts',
+    'alerts.title': 'รายการที่ควรเติมสต็อก',
+    'case.eyebrow': 'Case Study',
+    'case.title': 'สรุปแนวคิดโปรเจค',
+    'case.problemTitle': 'ปัญหาที่แก้',
+    'case.problemBody': 'ร้านค้าขนาดเล็กมักตรวจสต็อกยาก ไม่เห็นสินค้าที่ควรเติม และต้องสรุปยอดด้วยมือ',
+    'case.solutionTitle': 'สิ่งที่ระบบทำได้',
+    'case.solutionBody': 'รวมข้อมูลสินค้า คำสั่งซื้อ สถานะสต็อก และรายงานเบื้องต้นไว้ในหน้าจอเดียว',
+    'case.skillsTitle': 'ทักษะที่แสดง',
+    'case.skillsBody': 'DOM manipulation, form validation, LocalStorage, filtering, calculations, responsive UI',
+    'orders.eyebrow': 'Orders',
+    'orders.title': 'คำสั่งซื้อวันนี้',
+    healthReady: 'ระบบพร้อมใช้งาน',
+    healthLow: 'มีสินค้าควรเติมสต็อก',
+    statusLow: 'ใกล้หมด',
+    statusOk: 'พร้อมขาย',
+    delete: 'ลบ',
+    qtyControl: 'ปรับจำนวน',
+    noProducts: 'ไม่พบข้อมูลสินค้า',
+    alertRemaining: 'เหลือ {qty} ชิ้น - ควรเติมสต็อก',
+    restock: 'เติมเป็น 20 ชิ้น',
+    noAlerts: 'ยังไม่มีสินค้าใกล้หมด',
+    reportStockValue: 'มูลค่าคงคลังทั้งหมด',
+    reportTotalQty: 'จำนวนสินค้ารวม',
+    reportLowStock: 'รายการที่ควรเติมสต็อก',
+    reportCategories: 'หมวดหมู่สินค้า',
+    csvFile: 'stockflow-report-thai.csv',
+    csvStatusLow: 'ใกล้หมด',
+    csvStatusOk: 'พร้อมขาย'
+  },
+  en: {
+    pageTitle: 'StockFlow Mini ERP | Thanaphat Portfolio Project',
+    metaDescription: 'StockFlow Mini ERP, an inventory and order management demo for material stores and product businesses.',
+    'language.switchLabel': 'Choose language',
+    'sidebar.label': 'Project navigation',
+    'sidebar.dashboard': 'Dashboard',
+    'sidebar.inventory': 'Inventory',
+    'sidebar.orders': 'Orders',
+    'sidebar.report': 'Report',
+    'sidebar.back': 'Back to Portfolio',
+    'top.eyebrow': 'Business Web Application',
+    'top.title': 'Inventory and Order Management System',
+    'top.export': 'Export CSV',
+    'top.reset': 'Reset Data',
+    'hero.title': 'Mini ERP for material stores and product businesses',
+    'hero.body': 'This demo manages products, orders, stock status, and basic reports in one screen using HTML, CSS, and JavaScript.',
+    'hero.healthLabel': 'System health',
+    'hero.storageNote': 'Data is saved with LocalStorage on the viewer device',
+    'kpi.label': 'Summary cards',
+    'kpi.stockValue': 'Stock Value',
+    'kpi.totalItems': 'Total Items',
+    'kpi.lowStock': 'Low Stock',
+    'kpi.monthlyOrders': 'Orders This Month',
+    'inventory.eyebrow': 'Inventory',
+    'inventory.title': 'Inventory',
+    'inventory.search': 'Search products',
+    'inventory.categoryFilter': 'Filter category',
+    'category.all': 'All Categories',
+    'category.materials': 'Building Materials',
+    'category.tools': 'Tools',
+    'category.plumbing': 'Plumbing',
+    'category.electrical': 'Electrical',
+    'table.product': 'Product',
+    'table.category': 'Category',
+    'table.qty': 'Stock',
+    'table.price': 'Price',
+    'table.status': 'Status',
+    'form.eyebrow': 'Add Item',
+    'form.title': 'Add Product',
+    'form.nameLabel': 'Product Name',
+    'form.namePlaceholder': 'e.g. Cement',
+    'form.categoryLabel': 'Category',
+    'form.qtyLabel': 'Quantity',
+    'form.priceLabel': 'Price',
+    'form.submit': 'Add Product',
+    'form.note': 'New products appear in the table immediately and update the dashboard automatically.',
+    'analytics.eyebrow': 'Analytics',
+    'analytics.title': 'Stock Value by Category',
+    'alerts.eyebrow': 'Alerts',
+    'alerts.title': 'Items to Restock',
+    'case.eyebrow': 'Case Study',
+    'case.title': 'Project Concept Summary',
+    'case.problemTitle': 'Problem Solved',
+    'case.problemBody': 'Small shops often struggle to check stock, spot items that need restocking, and summarize totals manually.',
+    'case.solutionTitle': 'What the System Does',
+    'case.solutionBody': 'It brings product data, orders, stock status, and basic reports into one clear workspace.',
+    'case.skillsTitle': 'Skills Demonstrated',
+    'case.skillsBody': 'DOM manipulation, form validation, LocalStorage, filtering, calculations, responsive UI',
+    'orders.eyebrow': 'Orders',
+    'orders.title': 'Today Orders',
+    healthReady: 'System ready',
+    healthLow: 'Some items need restocking',
+    statusLow: 'Low stock',
+    statusOk: 'Ready',
+    delete: 'Delete',
+    qtyControl: 'Adjust quantity for',
+    noProducts: 'No products found',
+    alertRemaining: '{qty} left - restock recommended',
+    restock: 'Restock to 20',
+    noAlerts: 'No low-stock items',
+    reportStockValue: 'Total stock value',
+    reportTotalQty: 'Total quantity',
+    reportLowStock: 'Items to restock',
+    reportCategories: 'Product categories',
+    csvFile: 'stockflow-report-en.csv',
+    csvStatusLow: 'Low stock',
+    csvStatusOk: 'Ready'
+  }
+};
+
+const categoryLabels = {
+  th: {
+    all: 'ทุกหมวดหมู่',
+    'วัสดุก่อสร้าง': 'วัสดุก่อสร้าง',
+    'เครื่องมือ': 'เครื่องมือ',
+    'ประปา': 'ประปา',
+    'ไฟฟ้า': 'ไฟฟ้า'
+  },
+  en: {
+    all: 'All Categories',
+    'วัสดุก่อสร้าง': 'Building Materials',
+    'เครื่องมือ': 'Tools',
+    'ประปา': 'Plumbing',
+    'ไฟฟ้า': 'Electrical'
+  }
+};
+
+const productTranslations = {
+  'ปูนซีเมนต์ตราเพชร': 'Diamond Brand Cement',
+  'ท่อ PVC 1 นิ้ว': '1-inch PVC Pipe',
+  'สว่านไฟฟ้า 650W': '650W Electric Drill',
+  'สายไฟ VAF 2x2.5': 'VAF 2x2.5 Cable',
+  'ข้อต่อสามทาง PVC': 'PVC Tee Fitting',
+  'ลูกหมูเจียร 4 นิ้ว': '4-inch Angle Grinder',
+  'สีทาภายนอก 1 แกลลอน': 'Exterior Paint, 1 Gallon'
+};
+
+const orderTranslations = {
+  customers: {
+    'หจก.ณัฐวัสดุ': 'Nat Materials LP',
+    'โรงงานน้ำดื่มสไมล์': 'Smile Drinking Water Factory',
+    'ช่างเอก เซอร์วิส': 'Aek Service'
+  },
+  statuses: {
+    'รอจัดสินค้า': 'Preparing',
+    'กำลังจัดส่ง': 'Shipping',
+    'สำเร็จแล้ว': 'Completed'
+  }
+};
+
+const seedProducts = [
   { id: 1, name: 'ปูนซีเมนต์ตราเพชร', category: 'วัสดุก่อสร้าง', qty: 42, price: 165 },
   { id: 2, name: 'ท่อ PVC 1 นิ้ว', category: 'ประปา', qty: 18, price: 48 },
   { id: 3, name: 'สว่านไฟฟ้า 650W', category: 'เครื่องมือ', qty: 7, price: 1190 },
@@ -16,6 +217,7 @@ const orders = [
 
 const storageKey = 'stockflow-products-v1';
 let products = loadProducts();
+let currentLanguage = getSavedLanguage() || 'th';
 
 const rows = document.querySelector('#inventoryRows');
 const searchInput = document.querySelector('#searchInput');
@@ -33,12 +235,54 @@ function saveProducts() {
   localStorage.setItem(storageKey, JSON.stringify(products));
 }
 
+function getSavedLanguage() {
+  try {
+    return localStorage.getItem(languageStorageKey);
+  } catch (error) {
+    return null;
+  }
+}
+
+function saveLanguage(language) {
+  try {
+    localStorage.setItem(languageStorageKey, language);
+  } catch (error) {
+    // Ignore private browsing or blocked storage.
+  }
+}
+
+function t(key) {
+  return copy[currentLanguage][key] || copy.th[key] || key;
+}
+
 function money(value) {
-  return new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB', maximumFractionDigits: 0 }).format(value);
+  const locale = currentLanguage === 'en' ? 'en-US' : 'th-TH';
+  return new Intl.NumberFormat(locale, { style: 'currency', currency: 'THB', maximumFractionDigits: 0 }).format(value);
+}
+
+function number(value) {
+  const locale = currentLanguage === 'en' ? 'en-US' : 'th-TH';
+  return Number(value).toLocaleString(locale);
 }
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char]));
+}
+
+function labelCategory(category) {
+  return categoryLabels[currentLanguage][category] || category;
+}
+
+function labelProduct(product) {
+  return currentLanguage === 'en' ? productTranslations[product.name] || product.name : product.name;
+}
+
+function labelOrderCustomer(customer) {
+  return currentLanguage === 'en' ? orderTranslations.customers[customer] || customer : customer;
+}
+
+function labelOrderStatus(status) {
+  return currentLanguage === 'en' ? orderTranslations.statuses[status] || status : status;
 }
 
 function getStatus(product) {
@@ -58,44 +302,49 @@ function renderInventory() {
   const keyword = searchInput.value.trim().toLowerCase();
   const category = categoryFilter.value;
   const filtered = products.filter((product) => {
-    const matchKeyword = product.name.toLowerCase().includes(keyword) || product.category.toLowerCase().includes(keyword);
+    const productName = product.name.toLowerCase();
+    const translatedName = labelProduct(product).toLowerCase();
+    const categoryName = product.category.toLowerCase();
+    const translatedCategory = labelCategory(product.category).toLowerCase();
+    const matchKeyword = productName.includes(keyword) || translatedName.includes(keyword) || categoryName.includes(keyword) || translatedCategory.includes(keyword);
     const matchCategory = category === 'all' || product.category === category;
     return matchKeyword && matchCategory;
   });
 
   rows.innerHTML = filtered.map((product) => {
     const status = getStatus(product);
+    const displayName = labelProduct(product);
     return `
       <tr>
-        <td><strong>${escapeHtml(product.name)}</strong><small>SKU-${String(product.id).padStart(4, '0')}</small></td>
-        <td>${escapeHtml(product.category)}</td>
+        <td><strong>${escapeHtml(displayName)}</strong><small>SKU-${String(product.id).padStart(4, '0')}</small></td>
+        <td>${escapeHtml(labelCategory(product.category))}</td>
         <td>
-          <div class="qty-control" aria-label="ปรับจำนวน ${escapeHtml(product.name)}">
+          <div class="qty-control" aria-label="${escapeHtml(`${t('qtyControl')} ${displayName}`)}">
             <button type="button" data-adjust="-1" data-id="${product.id}">-</button>
             <span>${product.qty}</span>
             <button type="button" data-adjust="1" data-id="${product.id}">+</button>
           </div>
         </td>
         <td>${money(product.price)}</td>
-        <td><span class="status-pill status-${status}">${status === 'low' ? 'ใกล้หมด' : 'พร้อมขาย'}</span></td>
-        <td><button class="delete-btn" type="button" data-delete="${product.id}">ลบ</button></td>
+        <td><span class="status-pill status-${status}">${status === 'low' ? t('statusLow') : t('statusOk')}</span></td>
+        <td><button class="delete-btn" type="button" data-delete="${product.id}">${t('delete')}</button></td>
       </tr>
     `;
-  }).join('') || '<tr><td colspan="6">ไม่พบข้อมูลสินค้า</td></tr>';
+  }).join('') || `<tr><td colspan="6">${t('noProducts')}</td></tr>`;
 }
 
 function renderSummary() {
   const summary = totals();
   document.querySelector('#stockValue').textContent = money(summary.stockValue);
-  document.querySelector('#totalItems').textContent = summary.totalQty.toLocaleString('th-TH');
+  document.querySelector('#totalItems').textContent = number(summary.totalQty);
   document.querySelector('#lowStock').textContent = summary.lowStock;
   document.querySelector('#monthlyOrders').textContent = orders.length;
-  document.querySelector('#healthText').textContent = summary.lowStock > 0 ? 'มีสินค้าควรเติมสต็อก' : 'ระบบพร้อมใช้งาน';
+  document.querySelector('#healthText').textContent = summary.lowStock > 0 ? t('healthLow') : t('healthReady');
   document.querySelector('#reportSummary').innerHTML = `
-    <span><strong>${money(summary.stockValue)}</strong>มูลค่าคงคลังทั้งหมด</span>
-    <span><strong>${summary.totalQty.toLocaleString('th-TH')}</strong>จำนวนสินค้ารวม</span>
-    <span><strong>${summary.lowStock}</strong>รายการที่ควรเติมสต็อก</span>
-    <span><strong>${summary.categories}</strong>หมวดหมู่สินค้า</span>
+    <span><strong>${money(summary.stockValue)}</strong>${t('reportStockValue')}</span>
+    <span><strong>${number(summary.totalQty)}</strong>${t('reportTotalQty')}</span>
+    <span><strong>${summary.lowStock}</strong>${t('reportLowStock')}</span>
+    <span><strong>${summary.categories}</strong>${t('reportCategories')}</span>
   `;
 }
 
@@ -108,7 +357,7 @@ function renderChart() {
   const max = Math.max(...Object.values(categoryTotals), 1);
   chart.innerHTML = Object.entries(categoryTotals).map(([name, value]) => `
     <div class="chart-row">
-      <strong>${escapeHtml(name)}</strong>
+      <strong>${escapeHtml(labelCategory(name))}</strong>
       <div class="chart-track"><div class="chart-fill" style="width: ${Math.max((value / max) * 100, 4)}%"></div></div>
       <span class="chart-value">${money(value)}</span>
     </div>
@@ -120,11 +369,11 @@ function renderAlerts() {
   const lows = products.filter((item) => item.qty <= 10).sort((a, b) => a.qty - b.qty);
   alertList.innerHTML = lows.map((item) => `
     <div class="alert-item">
-      <strong>${escapeHtml(item.name)}</strong>
-      <span>เหลือ ${item.qty} ชิ้น - ควรเติมสต็อก</span>
-      <button class="restock-btn" type="button" data-restock="${item.id}">เติมเป็น 20 ชิ้น</button>
+      <strong>${escapeHtml(labelProduct(item))}</strong>
+      <span>${t('alertRemaining').replace('{qty}', item.qty)}</span>
+      <button class="restock-btn" type="button" data-restock="${item.id}">${t('restock')}</button>
     </div>
-  `).join('') || '<div class="empty-state">ยังไม่มีสินค้าใกล้หมด</div>';
+  `).join('') || `<div class="empty-state">${t('noAlerts')}</div>`;
 }
 
 function renderOrders() {
@@ -132,9 +381,9 @@ function renderOrders() {
   board.innerHTML = orders.map((order) => `
     <article class="order-card">
       <span>${order.id}</span>
-      <p>${escapeHtml(order.customer)}</p>
+      <p>${escapeHtml(labelOrderCustomer(order.customer))}</p>
       <strong>${money(order.amount)}</strong><br>
-      <small>${order.status}</small>
+      <small>${escapeHtml(labelOrderStatus(order.status))}</small>
     </article>
   `).join('');
 }
@@ -147,16 +396,62 @@ function renderAll() {
   renderOrders();
 }
 
+function applyText(selector, attribute, dictionary) {
+  document.querySelectorAll(selector).forEach((element) => {
+    const key = element.dataset[attribute];
+    if (dictionary[key]) {
+      element.textContent = dictionary[key];
+    }
+  });
+}
+
+function applyAttribute(selector, dataAttribute, domAttribute, dictionary) {
+  document.querySelectorAll(selector).forEach((element) => {
+    const key = element.dataset[dataAttribute];
+    if (dictionary[key]) {
+      element.setAttribute(domAttribute, dictionary[key]);
+    }
+  });
+}
+
+function setLanguage(language) {
+  currentLanguage = copy[language] ? language : 'th';
+  const dictionary = copy[currentLanguage];
+  const metaDescription = document.querySelector('meta[name="description"]');
+
+  document.documentElement.lang = currentLanguage;
+  document.title = dictionary.pageTitle;
+
+  if (metaDescription) {
+    metaDescription.setAttribute('content', dictionary.metaDescription);
+  }
+
+  applyText('[data-i18n]', 'i18n', dictionary);
+  applyAttribute('[data-i18n-placeholder]', 'i18nPlaceholder', 'placeholder', dictionary);
+  applyAttribute('[data-i18n-aria-label]', 'i18nAriaLabel', 'aria-label', dictionary);
+
+  document.querySelectorAll('[data-lang]').forEach((button) => {
+    const isActive = button.dataset.lang === currentLanguage;
+    button.classList.toggle('is-active', isActive);
+    button.setAttribute('aria-pressed', String(isActive));
+  });
+
+  saveLanguage(currentLanguage);
+  renderAll();
+}
+
 function exportCsv() {
-  const header = ['SKU', 'Name', 'Category', 'Quantity', 'Price', 'Stock Value', 'Status'];
+  const header = currentLanguage === 'en'
+    ? ['SKU', 'Name', 'Category', 'Quantity', 'Price', 'Stock Value', 'Status']
+    : ['SKU', 'ชื่อสินค้า', 'หมวดหมู่', 'จำนวน', 'ราคา', 'มูลค่าสต็อก', 'สถานะ'];
   const lines = products.map((item) => [
     `SKU-${String(item.id).padStart(4, '0')}`,
-    item.name,
-    item.category,
+    labelProduct(item),
+    labelCategory(item.category),
     item.qty,
     item.price,
     item.qty * item.price,
-    getStatus(item) === 'low' ? 'Low stock' : 'Ready'
+    getStatus(item) === 'low' ? t('csvStatusLow') : t('csvStatusOk')
   ]);
   const csv = [header, ...lines].map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\n');
   const utf8Bom = '\uFEFF';
@@ -164,7 +459,7 @@ function exportCsv() {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = 'stockflow-report-thai.csv';
+  link.download = t('csvFile');
   link.click();
   URL.revokeObjectURL(url);
 }
@@ -212,6 +507,10 @@ document.querySelector('#alertList').addEventListener('click', (event) => {
   renderAll();
 });
 
+document.querySelectorAll('[data-lang]').forEach((button) => {
+  button.addEventListener('click', () => setLanguage(button.dataset.lang));
+});
+
 searchInput.addEventListener('input', renderInventory);
 categoryFilter.addEventListener('change', renderInventory);
 exportBtn.addEventListener('click', exportCsv);
@@ -223,4 +522,4 @@ resetBtn.addEventListener('click', () => {
   renderAll();
 });
 
-renderAll();
+setLanguage(currentLanguage);

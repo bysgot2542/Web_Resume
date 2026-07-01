@@ -55,7 +55,29 @@ button { cursor: pointer; }
   font-weight: 800;
 }
 .sidebar nav a.active, .sidebar nav a:hover, .back-link:hover { color: var(--text); background: rgba(255,255,255,0.07); }
-.back-link { margin-top: auto; border: 1px solid var(--line); }
+.language-switch {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(42px, 1fr));
+  min-height: 38px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+}
+.sidebar .language-switch { width: 100%; margin-top: auto; }
+.lang-button {
+  min-width: 42px;
+  min-height: 30px;
+  border: 0;
+  border-radius: 6px;
+  color: var(--muted);
+  background: transparent;
+  font-weight: 950;
+  letter-spacing: 0;
+}
+.lang-button:hover, .lang-button:focus-visible { color: var(--text); outline: none; }
+.lang-button.is-active { color: #061116; background: linear-gradient(135deg, var(--accent), var(--green)); }
+.back-link { margin-top: 12px; border: 1px solid var(--line); }
 
 .app-shell { width: min(1180px, calc(100% - 310px)); margin-left: 280px; padding: 28px 0 60px; }
 .topbar, .hero, .panel, .kpi-card {
@@ -180,6 +202,7 @@ td small { color: var(--muted); }
   .sidebar { position: static; width: auto; min-height: auto; flex-direction: row; align-items: center; gap: 14px; overflow-x: auto; }
   .brand { margin-bottom: 0; }
   .sidebar nav { display: flex; }
+  .sidebar .language-switch { width: auto; margin-top: 0; flex: 0 0 auto; }
   .back-link { margin-top: 0; white-space: nowrap; }
   .app-shell { width: min(100% - 32px, 1180px); margin: 0 auto; padding-top: 18px; }
   .hero, .workspace, .insight-grid, .about-grid, .case-grid { grid-template-columns: 1fr; }
