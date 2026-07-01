@@ -3,210 +3,181 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio ของ ธนภัทร ชุมแก้ว Web Developer พร้อมประสบการณ์พัฒนาเว็บ ระบบบริหารจัดการข้อมูล และ Dashboard">
-  <title>ธนภัทร ชุมแก้ว | Web Developer Portfolio</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="StockFlow Mini ERP ระบบจัดการสต็อกและคำสั่งซื้อสำหรับร้านวัสดุและธุรกิจขายสินค้า">
+  <title>StockFlow Mini ERP | Thanaphat Portfolio Project</title>
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
-  <header class="site-header" id="top">
-    <nav class="nav" aria-label="Main navigation">
-      <a class="brand" href="#top" aria-label="กลับด้านบน" data-i18n-aria-label="nav.backTop">
-        <span class="brand-mark">T</span>
-        <span>Thanaphat</span>
-      </a>
-      <div class="nav-links" id="navMenu">
-        <a href="#about" data-i18n="nav.about">เกี่ยวกับ</a>
-        <a href="#experience" data-i18n="nav.work">ผลงาน</a>
-        <a href="#projects-demo" data-i18n="nav.demo">Demo</a>
-        <a href="#skills" data-i18n="nav.skills">ทักษะ</a>
-        <a href="#contact" data-i18n="nav.contact">ติดต่อ</a>
-      </div>
-      <div class="nav-actions">
-        <div class="language-switch" role="group" aria-label="เลือกภาษา" data-i18n-aria-label="language.switchLabel">
-          <button class="lang-button is-active" type="button" data-lang="th" aria-pressed="true">TH</button>
-          <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
-        </div>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="เปิดเมนู" data-i18n-aria-label="nav.openMenu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+  <aside class="sidebar" aria-label="Project navigation" data-i18n-aria-label="sidebar.label">
+    <a class="brand" href="../index.html#projects-demo">
+      <span>SF</span>
+      <strong>StockFlow</strong>
+    </a>
+    <nav>
+      <a href="#dashboard" class="active" data-i18n="sidebar.dashboard">Dashboard</a>
+      <a href="#inventory" data-i18n="sidebar.inventory">Inventory</a>
+      <a href="#orders" data-i18n="sidebar.orders">Orders</a>
+      <a href="#report" data-i18n="sidebar.report">Report</a>
     </nav>
-  </header>
+    <div class="language-switch" role="group" aria-label="เลือกภาษา" data-i18n-aria-label="language.switchLabel">
+      <button class="lang-button is-active" type="button" data-lang="th" aria-pressed="true">TH</button>
+      <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="back-link" href="../index.html#projects-demo" data-i18n="sidebar.back">กลับ Portfolio</a>
+  </aside>
 
-  <main>
-    <section class="hero section-band">
-      <div class="hero-copy reveal">
-        <p class="eyebrow" data-i18n="hero.eyebrow">Web Developer Portfolio</p>
-        <h1 data-i18n="hero.name">ธนภัทร ชุมแก้ว</h1>
-        <p class="lead" data-i18n="hero.lead">นักพัฒนาระบบรุ่นใหม่ที่ถนัดงานเว็บแอปพลิเคชัน ระบบบริหารจัดการข้อมูล และ Dashboard สำหรับใช้งานจริงในองค์กร</p>
-        <div class="hero-actions">
-          <a class="button primary" href="#experience" data-i18n="hero.viewWork">ดูผลงาน</a>
-          <a class="button ghost" href="stockflow/index.html" data-i18n="hero.tryDemo">ลองระบบ</a>
-          <a class="button ghost" href="assets/resume.png" target="_blank" rel="noopener" data-resume-link data-i18n="hero.openResume">เปิดเรซูเม่</a>
-        </div>
-        <div class="quick-info" aria-label="ข้อมูลสรุป" data-i18n-aria-label="hero.quickInfoLabel">
-          <span data-i18n="hero.location">Songkhla, Thailand</span>
-          <span data-i18n="hero.availability">Available for Web Developer</span>
-          <span data-i18n="hero.graduation">Graduating 2026</span>
-        </div>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow" data-i18n="top.eyebrow">Business Web Application</p>
+        <h1 data-i18n="top.title">ระบบจัดการสต็อกและคำสั่งซื้อ</h1>
       </div>
-      <div class="hero-visual reveal" aria-label="ภาพโปรไฟล์" data-i18n-aria-label="hero.profileLabel">
-        <div class="portrait-wrap">
-          <img src="assets/profile.png" alt="ธนภัทร ชุมแก้ว" data-i18n-alt="hero.profileAlt">
-        </div>
-        <div class="status-card">
-          <span class="status-dot"></span>
-          <strong data-i18n="hero.statusTitle">Ready to join your team</strong>
-          <small data-i18n="hero.statusSkills">PHP, JavaScript, MySQL, Bootstrap</small>
-        </div>
+      <div class="top-actions">
+        <button class="secondary-btn" id="exportReport" type="button" data-i18n="top.export">Export CSV</button>
+        <button class="reset-btn" id="resetData" type="button" data-i18n="top.reset">รีเซ็ตข้อมูล</button>
+      </div>
+    </header>
+
+    <section class="hero" id="dashboard">
+      <div class="hero-copy">
+        <h2 data-i18n="hero.title">Mini ERP สำหรับร้านวัสดุ / ธุรกิจขายสินค้า</h2>
+        <p data-i18n="hero.body">ระบบนี้ออกแบบมาเพื่อจัดการข้อมูลสินค้า คำสั่งซื้อ สถานะสต็อก และรายงานเบื้องต้นในหน้าจอเดียว โดยใช้ HTML, CSS และ JavaScript</p>
+      </div>
+      <div class="health-card" aria-label="system health" data-i18n-aria-label="hero.healthLabel">
+        <span class="pulse"></span>
+        <strong id="healthText">ระบบพร้อมใช้งาน</strong>
+        <small data-i18n="hero.storageNote">ข้อมูลถูกจัดเก็บด้วย LocalStorage ในเครื่องผู้ชม</small>
       </div>
     </section>
 
-    <section class="section about" id="about">
-      <div class="section-heading reveal">
-        <p class="eyebrow" data-i18n="about.eyebrow">About Me</p>
-        <h2 data-i18n="about.title">พัฒนาเว็บให้ใช้งานง่าย จัดการข้อมูลได้ชัดเจน และต่อยอดได้จริง</h2>
-      </div>
-      <div class="about-grid">
-        <div class="about-text reveal">
-          <p data-i18n="about.body">ผมเป็นนักพัฒนาระบบที่มีประสบการณ์พัฒนาเว็บแอปพลิเคชันด้านบริหารจัดการข้อมูล โดยใช้ HTML, CSS, Bootstrap, PHP, JavaScript และฐานข้อมูล MySQL จุดแข็งของผมคือการทำงานเป็นทีม สื่อสารชัดเจน ใส่ใจคุณภาพงาน และพร้อมเรียนรู้เทคโนโลยีใหม่เพื่อพัฒนาระบบให้ตอบโจทย์ธุรกิจในระยะยาว</p>
-        </div>
-        <div class="contact-panel reveal" id="contact">
-          <h3 data-i18n="contact.title">ติดต่อ</h3>
-          <a href="tel:0641271746"><span data-i18n="contact.phone">Phone</span>064 127 1746</a>
-          <a href="mailto:bysgot@gmail.com"><span data-i18n="contact.email">Email</span>bysgot@gmail.com</a>
-          <p><span data-i18n="contact.line">Line</span>bysgot</p>
-          <p><span data-i18n="contact.locationLabel">Location</span><strong class="contact-value" data-i18n="contact.location">Natawee, Songkhla, Thailand</strong></p>
-        </div>
-      </div>
+    <section class="kpi-grid" aria-label="summary cards" data-i18n-aria-label="kpi.label">
+      <article class="kpi-card">
+        <span data-i18n="kpi.stockValue">มูลค่าสต็อก</span>
+        <strong id="stockValue">0</strong>
+      </article>
+      <article class="kpi-card">
+        <span data-i18n="kpi.totalItems">จำนวนสินค้า</span>
+        <strong id="totalItems">0</strong>
+      </article>
+      <article class="kpi-card warning">
+        <span data-i18n="kpi.lowStock">สินค้าใกล้หมด</span>
+        <strong id="lowStock">0</strong>
+      </article>
+      <article class="kpi-card success">
+        <span data-i18n="kpi.monthlyOrders">คำสั่งซื้อเดือนนี้</span>
+        <strong id="monthlyOrders">0</strong>
+      </article>
     </section>
 
-    <section class="section education">
-      <div class="section-heading reveal">
-        <p class="eyebrow" data-i18n="education.eyebrow">Education</p>
-        <h2 data-i18n="education.title">ประวัติการศึกษา</h2>
-      </div>
-      <div class="timeline compact reveal">
-        <article>
-          <time data-i18n="education.schoolDate">2564-2565</time>
+    <section class="workspace" id="inventory">
+      <div class="panel inventory-panel">
+        <div class="panel-head">
           <div>
-            <h3 data-i18n="education.schoolName">โรงเรียนมหาวชิราวุธ จังหวัดสงขลา</h3>
-            <p data-i18n="education.schoolProgram">สายการเรียน วิทย์-คณิต</p>
+            <p class="eyebrow" data-i18n="inventory.eyebrow">Inventory</p>
+            <h2 data-i18n="inventory.title">คลังสินค้า</h2>
           </div>
-        </article>
-        <article>
-          <time data-i18n="education.universityDate">2564-2565</time>
+          <div class="filters">
+            <input id="searchInput" type="search" placeholder="ค้นหาสินค้า" data-i18n-placeholder="inventory.search">
+            <select id="categoryFilter" aria-label="กรองหมวดหมู่" data-i18n-aria-label="inventory.categoryFilter">
+              <option value="all" data-i18n="category.all">ทุกหมวดหมู่</option>
+              <option value="วัสดุก่อสร้าง" data-i18n="category.materials">วัสดุก่อสร้าง</option>
+              <option value="เครื่องมือ" data-i18n="category.tools">เครื่องมือ</option>
+              <option value="ประปา" data-i18n="category.plumbing">ประปา</option>
+              <option value="ไฟฟ้า" data-i18n="category.electrical">ไฟฟ้า</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th data-i18n="table.product">สินค้า</th>
+                <th data-i18n="table.category">หมวดหมู่</th>
+                <th data-i18n="table.qty">คงเหลือ</th>
+                <th data-i18n="table.price">ราคา</th>
+                <th data-i18n="table.status">สถานะ</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="inventoryRows"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <form class="panel product-form" id="productForm">
+        <p class="eyebrow" data-i18n="form.eyebrow">Add Item</p>
+        <h2 data-i18n="form.title">เพิ่มสินค้า</h2>
+        <label><span data-i18n="form.nameLabel">ชื่อสินค้า</span><input id="productName" required minlength="2" placeholder="เช่น ปูนซีเมนต์" data-i18n-placeholder="form.namePlaceholder"></label>
+        <label><span data-i18n="form.categoryLabel">หมวดหมู่</span>
+          <select id="productCategory" required>
+            <option value="วัสดุก่อสร้าง" data-i18n="category.materials">วัสดุก่อสร้าง</option>
+            <option value="เครื่องมือ" data-i18n="category.tools">เครื่องมือ</option>
+            <option value="ประปา" data-i18n="category.plumbing">ประปา</option>
+            <option value="ไฟฟ้า" data-i18n="category.electrical">ไฟฟ้า</option>
+          </select>
+        </label>
+        <div class="form-grid">
+          <label><span data-i18n="form.qtyLabel">จำนวน</span><input id="productQty" required type="number" min="0" value="10"></label>
+          <label><span data-i18n="form.priceLabel">ราคา</span><input id="productPrice" required type="number" min="1" value="120"></label>
+        </div>
+        <button type="submit" data-i18n="form.submit">เพิ่มสินค้า</button>
+        <p class="form-note" data-i18n="form.note">รายการที่เพิ่มจะแสดงทันทีในตารางและคำนวณ Dashboard ใหม่อัตโนมัติ</p>
+      </form>
+    </section>
+
+    <section class="insight-grid">
+      <div class="panel chart-panel">
+        <div class="panel-head simple">
           <div>
-            <h3 data-i18n="education.universityName">มหาวิทยาลัยราชภัฏสงขลา</h3>
-            <p data-i18n="education.universityProgram">คณะวิทยาการจัดการ เอกคอมพิวเตอร์ธุรกิจ</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section experience" id="experience">
-      <div class="section-heading reveal">
-        <p class="eyebrow" data-i18n="work.eyebrow">Selected Work</p>
-        <h2 data-i18n="work.title">ผลงานและประสบการณ์ระหว่างศึกษา</h2>
-      </div>
-      <div class="project-grid">
-        <article class="project-card reveal">
-          <span class="project-number">01</span>
-          <h3 data-i18n="work.project1.title">ระบบบริหารร้าน อ.วัสดุ</h3>
-          <p data-i18n="work.project1.body">พัฒนาระบบบริหารและจัดการข้อมูลเพื่อให้การทำงานสะดวกขึ้น มีประสิทธิภาพ และลดขั้นตอนจากระบบเดิม</p>
-          <div class="tag-row"><span>PHP</span><span>MySQL</span><span>Bootstrap</span></div>
-        </article>
-        <article class="project-card reveal">
-          <span class="project-number">02</span>
-          <h3 data-i18n="work.project2.title">ระบบบริหารจัดการข้อมูลโรงงานน้ำ</h3>
-          <p data-i18n="work.project2.body">ออกแบบโครงสร้างระบบ จัดการข้อมูลบริษัท และรองรับการใช้งานจริงสำหรับการทำงานและการตัดสินใจของผู้เกี่ยวข้อง</p>
-          <div class="tag-row"><span>System Design</span><span>Database</span><span>Admin</span></div>
-        </article>
-        <article class="project-card reveal">
-          <span class="project-number">03</span>
-          <h3 data-i18n="work.project3.title">Graphic for Content Creator</h3>
-          <p data-i18n="work.project3.body">ออกแบบและตกแต่งภาพสำหรับงานคอนเทนต์ ช่วยให้สื่อมีความชัดเจนและน่าสนใจมากขึ้น</p>
-          <div class="tag-row"><span>Photoshop</span><span>Illustrator</span><span>Content</span></div>
-        </article>
-        <article class="project-card reveal">
-          <span class="project-number">04</span>
-          <h3 data-i18n="work.project4.title">Dashboard รายงานความพึงพอใจ</h3>
-          <p data-i18n="work.project4.body">ออกแบบ Dashboard ด้วย Looker เพื่อสรุปรายงานประเมินความพึงพอใจต่อบริการข้อมูลข่าวสารรายปี</p>
-          <div class="tag-row"><span>Looker</span><span>Dashboard</span><span>Report</span></div>
-        </article>
-        <article class="project-card wide reveal">
-          <span class="project-number">05</span>
-          <h3 data-i18n="work.project5.title">บริษัท แอ็บโซลูท เทคโนวัน จำกัด</h3>
-          <p data-i18n="work.project5.body">ดูแลและพัฒนาระบบในตำแหน่ง Programmer สนับสนุนการเขียนโปรแกรม ปรับปรุงระบบให้ใช้งานต่อเนื่อง และร่วมแก้ไขปัญหากับทีมพัฒนา</p>
-          <div class="tag-row"><span>Programmer</span><span>Maintenance</span><span>Teamwork</span></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section demo-showcase" id="projects-demo">
-      <div class="section-heading reveal">
-        <p class="eyebrow" data-i18n="demo.eyebrow">Featured Project</p>
-        <h2 data-i18n="demo.title">โปรเจคระบบจัดการสต็อกสำหรับธุรกิจ</h2>
-      </div>
-      <div class="demo-layout reveal">
-        <div class="demo-copy">
-          <span class="project-number">06</span>
-          <h3 data-i18n="demo.projectTitle">StockFlow Mini ERP</h3>
-          <p data-i18n="demo.body">ระบบจัดการสต็อกและคำสั่งซื้อสำหรับร้านวัสดุ มี Dashboard, ค้นหา/กรองสินค้า, เพิ่ม/ลบข้อมูล, แจ้งเตือนของใกล้หมด และกราฟสรุปมูลค่าสต็อก เพื่อช่วยให้การติดตามสินค้าและรายงานประจำวันชัดเจนขึ้น</p>
-          <div class="tag-row"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>LocalStorage</span><span>Dashboard</span></div>
-          <div class="hero-actions demo-actions">
-            <a class="button primary" href="stockflow/index.html" data-i18n="demo.openProject">เปิดโปรเจค</a>
-            <a class="button ghost" href="stockflow/index.html#report" data-i18n="demo.viewCase">ดูแนวคิดโปรเจค</a>
+            <p class="eyebrow" data-i18n="analytics.eyebrow">Analytics</p>
+            <h2 data-i18n="analytics.title">มูลค่าสต็อกตามหมวดหมู่</h2>
           </div>
         </div>
-        <a class="demo-preview" href="stockflow/index.html" aria-label="เปิด StockFlow Mini ERP" data-i18n-aria-label="demo.previewLabel">
-          <div class="preview-top"><span></span><span></span><span></span></div>
-          <div class="preview-kpis"><b></b><b></b><b></b></div>
-          <div class="preview-table"><i></i><i></i><i></i><i></i></div>
-        </a>
+        <div id="chartBars" class="chart-bars"></div>
+      </div>
+      <div class="panel alert-panel">
+        <p class="eyebrow" data-i18n="alerts.eyebrow">Alerts</p>
+        <h2 data-i18n="alerts.title">รายการที่ควรเติมสต็อก</h2>
+        <div id="alertList" class="alert-list"></div>
       </div>
     </section>
 
-    <section class="section skills" id="skills">
-      <div class="section-heading reveal">
-        <p class="eyebrow" data-i18n="skills.eyebrow">Skills</p>
-        <h2 data-i18n="skills.title">ทักษะและเครื่องมือ</h2>
-      </div>
-      <div class="skills-layout">
-        <div class="skill-list reveal">
-          <span>HTML</span><span>CSS</span><span>PHP</span><span>JavaScript</span><span>SQL</span><span>Bootstrap</span><span>MySQL</span><span>Looker</span>
-        </div>
-        <div class="software-list reveal">
-          <h3 data-i18n="skills.softwareTitle">Software</h3>
-          <p data-i18n="skills.softwareBody">Adobe Illustrator, Photoshop, Visual Studio Code, Microsoft Excel, Word, PowerPoint</p>
-          <h3 data-i18n="skills.interestTitle">Interest</h3>
-          <p data-i18n="skills.interestBody">Coding, Games, AI, Design, Web Technology</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section resume-preview">
-      <div class="section-heading resume-heading reveal">
+    <div class="anchor-point" id="about" aria-hidden="true"></div>
+    <section class="panel report-panel" id="report">
+      <div class="panel-head simple">
         <div>
-          <p class="eyebrow" data-i18n="resume.eyebrow">Original Resume</p>
-          <h2 data-i18n="resume.title">ดูเรซูเม่ฉบับภาพ</h2>
-        </div>
-        <div class="language-switch resume-switch" role="group" aria-label="เลือกภาษาเรซูเม่" data-i18n-aria-label="resume.switchLabel">
-          <button class="lang-button is-active" type="button" data-lang="th" aria-pressed="true">TH</button>
-          <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+          <p class="eyebrow" data-i18n="case.eyebrow">Case Study</p>
+          <h2 data-i18n="case.title">สรุปแนวคิดโปรเจค</h2>
         </div>
       </div>
-      <a class="resume-image reveal" href="assets/resume.png" target="_blank" rel="noopener" aria-label="เปิดเรซูเม่ขนาดเต็ม" data-resume-link data-i18n-aria-label="resume.openFull">
-        <img src="assets/resume.png" alt="เรซูเม่ของ ธนภัทร ชุมแก้ว" data-resume-img data-i18n-alt="resume.imageAlt">
-      </a>
+      <div class="case-grid">
+        <article>
+          <strong data-i18n="case.problemTitle">ปัญหาที่แก้</strong>
+          <p data-i18n="case.problemBody">ร้านค้าขนาดเล็กมักตรวจสต็อกยาก ไม่เห็นสินค้าที่ควรเติม และต้องสรุปยอดด้วยมือ</p>
+        </article>
+        <article>
+          <strong data-i18n="case.solutionTitle">สิ่งที่ระบบทำได้</strong>
+          <p data-i18n="case.solutionBody">รวมข้อมูลสินค้า คำสั่งซื้อ สถานะสต็อก และรายงานเบื้องต้นไว้ในหน้าจอเดียว</p>
+        </article>
+        <article>
+          <strong data-i18n="case.skillsTitle">ทักษะที่แสดง</strong>
+          <p data-i18n="case.skillsBody">DOM manipulation, form validation, LocalStorage, filtering, calculations, responsive UI</p>
+        </article>
+      </div>
+      <div class="metric-list" id="reportSummary"></div>
+    </section>
+
+    <section class="panel orders" id="orders">
+      <div class="panel-head simple">
+        <div>
+          <p class="eyebrow" data-i18n="orders.eyebrow">Orders</p>
+          <h2 data-i18n="orders.title">คำสั่งซื้อวันนี้</h2>
+        </div>
+      </div>
+      <div class="order-board" id="orderBoard"></div>
     </section>
   </main>
 
-  <footer class="footer">
-    <p data-i18n="footer.copy">© 2026 Thanaphat Chumkaew. Web Developer Portfolio.</p>
-    <a href="#top" data-i18n="footer.backTop">Back to top</a>
-  </footer>
-
-  <script src="script.js"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>
